@@ -1,0 +1,7 @@
+USE master;
+GO
+IF NOT EXISTS(SELECT * FROM sys.databases WHERE name = N'NFL')
+BEGIN
+	CREATE DATABASE NFL
+END
+GO
