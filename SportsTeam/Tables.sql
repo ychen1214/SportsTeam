@@ -4,7 +4,7 @@ DROP TABLE [Coach]
 DROP TABLE [Ethnicity]
 DROP TABLE [Gender]
 DROP TABLE [Race]
-
+DROP TABLE [Player]
 */
 SET ANSI_NULLS ON
 GO
@@ -12,6 +12,80 @@ SET QUOTED_IDENTIFIER ON
 GO
 SET NOCOUNT ON
 GO
+
+
+CREATE TABLE [dbo].[Player](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[TeamId] [int] NULL,
+	[EthnicityId] [int] NOT NULL,
+	[FirstName] [nvarchar](500) NULL,
+	[LastName] [nvarchar](500) NULL,
+	[CollegeId] [int] NULL,
+	[HeightInches] [int] NULL,
+	[WeightLbs] [int] NULL,
+	[GenderId] [int] NULL,
+	[RaceId] [int] NULL,
+	[JerseyId] [int] NULL,
+	[SalaryId] [int] NULL,
+ CONSTRAINT [PK_Player] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[Player]  WITH CHECK ADD  CONSTRAINT [FK_Player_College] FOREIGN KEY([CollegeId])
+REFERENCES [dbo].[College] ([Id])
+GO
+
+ALTER TABLE [dbo].[Player] CHECK CONSTRAINT [FK_Player_College]
+GO
+
+ALTER TABLE [dbo].[Player]  WITH CHECK ADD  CONSTRAINT [FK_Player_Ethnicity] FOREIGN KEY([EthnicityId])
+REFERENCES [dbo].[Ethnicity] ([Id])
+GO
+
+ALTER TABLE [dbo].[Player] CHECK CONSTRAINT [FK_Player_Ethnicity]
+GO
+
+ALTER TABLE [dbo].[Player]  WITH CHECK ADD  CONSTRAINT [FK_Player_Gender] FOREIGN KEY([GenderId])
+REFERENCES [dbo].[Gender] ([Id])
+GO
+
+ALTER TABLE [dbo].[Player] CHECK CONSTRAINT [FK_Player_Gender]
+GO
+
+ALTER TABLE [dbo].[Player]  WITH CHECK ADD  CONSTRAINT [FK_Player_Jersey] FOREIGN KEY([JerseyId])
+REFERENCES [dbo].[Jersey] ([Id])
+GO
+
+ALTER TABLE [dbo].[Player] CHECK CONSTRAINT [FK_Player_Jersey]
+GO
+
+ALTER TABLE [dbo].[Player]  WITH CHECK ADD  CONSTRAINT [FK_Player_Race] FOREIGN KEY([RaceId])
+REFERENCES [dbo].[Race] ([Id])
+GO
+
+ALTER TABLE [dbo].[Player] CHECK CONSTRAINT [FK_Player_Race]
+GO
+
+ALTER TABLE [dbo].[Player]  WITH CHECK ADD  CONSTRAINT [FK_Player_Salary] FOREIGN KEY([SalaryId])
+REFERENCES [dbo].[Salary] ([Id])
+GO
+
+ALTER TABLE [dbo].[Player] CHECK CONSTRAINT [FK_Player_Salary]
+GO
+
+ALTER TABLE [dbo].[Player]  WITH CHECK ADD  CONSTRAINT [FK_Player_Team] FOREIGN KEY([TeamId])
+REFERENCES [dbo].[Team] ([Id])
+GO
+
+ALTER TABLE [dbo].[Player] CHECK CONSTRAINT [FK_Player_Team]
+GO
+
+
+
 
 IF NOT EXISTS(SELECT * FROM sys.tables WHERE name = N'City')
 CREATE TABLE [dbo].[City](
