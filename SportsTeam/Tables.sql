@@ -5,8 +5,6 @@ DROP TABLE [Ethnicity]
 DROP TABLE [Gender]
 DROP TABLE [Race]
 
-
-
 */
 SET ANSI_NULLS ON
 GO
