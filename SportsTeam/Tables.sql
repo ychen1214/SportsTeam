@@ -1,12 +1,10 @@
-/*
+/*************************************************************
 DROP TABLE Player
 DROP TABLE Ownership
 DROP TABLE Jersey
-
+DROP TABLE OWNER
 DROP TABLE Team
 DROP TABLE TeamType
-
-DROP TABLE OWNER
 DROP TABLE Stadium
 DROP TABLE Salary
 DROP TABLE GeneralManager
@@ -15,7 +13,7 @@ DROP TABLE Gender
 DROP TABLE Ethnicity
 DROP TABLE Coach
 DROP TABLE City
-*/
+***********************************************************/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -26,7 +24,7 @@ GO
 IF NOT EXISTS(SELECT * FROM sys.tables WHERE name = N'City')
 BEGIN
 CREATE TABLE [dbo].[City](
-      [Id]			[INT] NOT NULL
+      [Id]			[INT] IDENTITY(1,1) NOT NULL
 	, [CityName]	[NVARCHAR](250) NULL
 	, [CityState]	[NVARCHAR](250) NULL
 	, CONSTRAINT [PK_City] PRIMARY KEY CLUSTERED ([Id] ASC)
@@ -37,7 +35,7 @@ GO
 IF NOT EXISTS(SELECT * FROM sys.tables WHERE name = N'Coach')
 BEGIN
 CREATE TABLE [dbo].[Coach](
-	  [Id] [INT] NOT NULL
+	  [Id] [INT] IDENTITY(1,1) NOT NULL
 	, CONSTRAINT [PK_Coach] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 END
@@ -46,7 +44,7 @@ GO
 IF NOT EXISTS(SELECT * FROM sys.tables WHERE name = N'Ethnicity')
 BEGIN
 CREATE TABLE [dbo].[Ethnicity](
-	  [Id]			[INT] NOT NULL
+	  [Id]			[INT] IDENTITY(1,1) NOT NULL
 	, [Ethnicity]	[NVARCHAR](500) NOT NULL
 	, CONSTRAINT [PK_Ethnicity] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
@@ -56,7 +54,7 @@ GO
 IF NOT EXISTS(SELECT * FROM sys.tables WHERE name = N'Gender')
 BEGIN
 CREATE TABLE [dbo].[Gender](
-	  [Id]		[INT] NOT NULL
+	  [Id]		[INT] IDENTITY(1,1) NOT NULL
 	, [Gender]	[NVARCHAR](250) NULL
 	, CONSTRAINT [PK_Gender] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
