@@ -1,10 +1,20 @@
 /*
-DROP TABLE [City]
-DROP TABLE [Coach]
-DROP TABLE [Ethnicity]
-DROP TABLE [Gender]
-DROP TABLE [Race]
-DROP TABLE [Player]
+DROP TABLE Player
+DROP TABLE Ownership
+DROP TABLE Jersey
+
+DROP TABLE Team
+DROP TABLE TeamType
+
+DROP TABLE OWNER
+DROP TABLE Stadium
+DROP TABLE Salary
+DROP TABLE GeneralManager
+DROP TABLE College
+DROP TABLE Gender
+DROP TABLE Ethnicity
+DROP TABLE Coach
+DROP TABLE City
 */
 SET ANSI_NULLS ON
 GO
@@ -12,6 +22,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 SET NOCOUNT ON
 GO
+
 IF NOT EXISTS(SELECT * FROM sys.tables WHERE name = N'City')
 BEGIN
 CREATE TABLE [dbo].[City](
@@ -159,20 +170,20 @@ ALTER TABLE [dbo].[Owner]  WITH CHECK ADD  CONSTRAINT [FK_Owner_Gender] FOREIGN 
 END
 GO
 
-IF NOT EXISTS(SELECT * FROM sys.tables WHERE name = N'Ownerships')
+IF NOT EXISTS(SELECT * FROM sys.tables WHERE name = N'Ownership')
 BEGIN
-CREATE TABLE [dbo].[Ownerships](
+CREATE TABLE [dbo].[Ownership](
 	  [Id]					[INT] IDENTITY(1,1) NOT NULL
 	, [OwnerId]				[INT] NOT NULL
 	, [TeamId]				[INT] NOT NULL
 	, [OwnershipYear]		[INT] NULL
 	, [OwnershipEndYear]	[INT] NULL
-    , CONSTRAINT [PK_Ownerships] PRIMARY KEY CLUSTERED ([Id] ASC)
+    , CONSTRAINT [PK_Ownership] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 
 
-ALTER TABLE [dbo].[Ownerships]  WITH CHECK ADD  CONSTRAINT [FK_Ownerships_Owner] FOREIGN KEY([OwnerId]) REFERENCES [dbo].[Owner] ([Id]);
-ALTER TABLE [dbo].[Ownerships]  WITH CHECK ADD  CONSTRAINT [FK_Ownerships_Team] FOREIGN KEY([TeamId]) REFERENCES [dbo].[Team] ([Id]);
+ALTER TABLE [dbo].[Ownership]  WITH CHECK ADD  CONSTRAINT [FK_Ownership_Owner] FOREIGN KEY([OwnerId]) REFERENCES [dbo].[Owner] ([Id]);
+ALTER TABLE [dbo].[Ownership]  WITH CHECK ADD  CONSTRAINT [FK_Ownership_Team] FOREIGN KEY([TeamId]) REFERENCES [dbo].[Team] ([Id]);
 
 END
 GO
