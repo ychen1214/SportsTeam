@@ -13,12 +13,41 @@ DROP TABLE Gender
 DROP TABLE Ethnicity
 DROP TABLE Coach
 DROP TABLE City
+DROP TABLE CountryState
+DROP TABLE Country
 ***********************************************************/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 SET NOCOUNT ON
+GO
+
+
+IF NOT EXISTS(SELECT * FROM sys.tables WHERE name = N'Country')
+BEGIN
+CREATE TABLE [dbo].[Country](
+	  [Id]					[INT] IDENTITY(1,1) NOT NULL
+	, [CountryName]			[NVARCHAR](250) NOT NULL 
+	, [CountryAbbreviation] [NVARCHAR](250) NULL
+	, CONSTRAINT [PK_Country] PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+END 
+GO
+
+IF NOT EXISTS(SELECT * FROM sys.tables WHERE name = N'CountryState')
+BEGIN
+CREATE TABLE [dbo].[CountryState](
+	  [Id]					[INT] IDENTITY(1,1) NOT NULL
+    , [CountryId]			[INT] NOT NULL
+	, [StateName]			[NVARCHAR](250) NOT NULL
+	, [StateAbbreviation]	[NVARCHAR](250) NULL
+	, CONSTRAINT [PK_CountryState] PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+ALTER TABLE [dbo].[CountryState]  WITH CHECK ADD  CONSTRAINT [FK_CountryState_Country] FOREIGN KEY([CountryId]) REFERENCES [dbo].[Country] ([Id]);
+
+END
 GO
 
 IF NOT EXISTS(SELECT * FROM sys.tables WHERE name = N'City')
